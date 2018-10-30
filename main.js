@@ -3,6 +3,7 @@ const butt = document.querySelector("#submit");
 
 
 var kummu = 0;
+var temp = 0;
 
 const fetch_user = async (userr) => {
   const api_call = await fetch(`https://api.github.com/search/users?q=${userr}`);
@@ -28,16 +29,17 @@ const show = () => {
     // console.log(k);
     if(kummu>0)
     {
-    if(jg==2)
+    if(jg==2 && temp > 2)
     {
       document.getElementById('im3o').remove();
     }
-    else if(jg==1)
+    else if(jg==1 && temp > 1)
     {
       document.getElementById('im2o').remove();
       document.getElementById('im3o').remove();
     }
   }kummu=kummu+1;
+  temp = k;
     // console.log(jg);
     for (i = 1; i <= jg; i++) {
       var id = 'no' + i;
