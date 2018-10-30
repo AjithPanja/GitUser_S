@@ -23,7 +23,7 @@ const show = () =>
       var img = 'img'+i;
       console.log(id);
       console.log(img);
-      document.getElementById(img).innerHTML=`<img style = "width:100%" src = ${res.data.items[i-1].avatar_url}></img><div class = "containerr"><p> ${res.data.items[i-1].login}</p></div>`;
+      document.getElementById(img).innerHTML=`<img style = "width:100%" src = ${res.data.items[i-1].avatar_url}></img><div class = "containerr">${res.data.items[i-1].login}</div>`;
       document.getElementById(img).href=`${res.data.items[i-1].html_url}`;
     }
     document.addEventListener('DOMContentLoaded', function() {
