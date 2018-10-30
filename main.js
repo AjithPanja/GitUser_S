@@ -1,47 +1,73 @@
 const user = document.querySelector("#user_n");
 const butt = document.querySelector("#submit");
-const get_user = document.querySelector(".username");
-const repo = document.querySelector(".Repository");
-const url = document.querySelector(".link");
 
-const fetch_user = async(userr) => {
+
+var kummu = 0;
+
+const fetch_user = async (userr) => {
   const api_call = await fetch(`https://api.github.com/search/users?q=${userr}`);
   const data = await api_call.json();
-  return {data};
+  return {
+    data
+  };
 };
 
-const show = () =>
-{
-  fetch_user(user.value).then((res)=>{
-    // get_user.innerHTML = `Name : ${res.data.items[2].name}`;
-    // repo.innerHTML = `Repositories : ${res.data.items[2].public_repos}`;
-    // url.innerHTML = `Link : ${res.data.items[2].html_url}`;
+const show = () => {
+  fetch_user(user.value).then((res) => {
+    var k = res.data.items.length;
     var i;
-    for(i=1;i<=3;i++)
-    {
-      var id = 'no'+i;
-      var img = 'img'+i;
-      console.log(id);
-      console.log(img);
-      document.getElementById(img).innerHTML=`<img style = "width:100%" src = ${res.data.items[i-1].avatar_url}></img><div class = "containerr">${res.data.items[i-1].login}</div>`;
-      document.getElementById(img).href=`${res.data.items[i-1].html_url}`;
+
+    var jg = 0;
+    if (k >= 3) {
+      jg = 3;
+    } else if (k == 2) {
+      jg = 2;
+    } else {
+      jg = 1;
     }
-    document.addEventListener('DOMContentLoaded', function() {
-       var elems = document.querySelectorAll('.carousel');
-       var instances = M.Carousel.init(elems, false);
-     });
-    console.log(res);
-    caro();
-  })
+    // console.log(k);
+    if(kummu>0)
+    {
+    if(jg==2)
+    {
+      document.getElementById('im3o').remove();
+    }
+    else if(jg==1)
+    {
+      document.getElementById('im2o').remove();
+      document.getElementById('im3o').remove();
+    }
+  }kummu=kummu+1;
+    // console.log(jg);
+    for (i = 1; i <= jg; i++) {
+      var id = 'no' + i;
+      var img = 'img' + i;
+      var j = 'im' + i;
+      //
+      // console.log(id);
+      // console.log(j);
+
+      // console.log(user_here[i - 1]);
+      var jumma = j + 'o';
+      document.getElementById(j).innerHTML = `<div class="card">
+
+      <div class="card-image" id = ${jumma}>
+        <img class="activator" src=${res.data.items[i-1].avatar_url}>
+        <span style = "font-weight = bold" class="card-title"> ${res.data.items[i-1].login} </span>
+        <a class="activator btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons ${res.data.items[i-1].login}">add</i></a>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">${res.data.items[i-1].login}<i class="material-icons right">close</i></span>
+        <p >User-Name : ${res.data.items[i-1].login} </p>
+        <p >GitHub-Link : <a href = ${res.data.items[i-1].html_url} > ${res.data.items[i-1].html_url} </p>
+
+      </div>
+    </div>`
+
+    }
+  });
 };
 
-butt.addEventListener("click" , () => {
+butt.addEventListener("click", () => {
   show();
 });
-
-var caro = () =>
-{document.addEventListener('DOMContentLoaded', function() {
-   var elems = document.querySelectorAll('.carousel');
-   var instances = M.Carousel.init(elems, duration = '100');
- });
-};
