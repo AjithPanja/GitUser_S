@@ -17,7 +17,11 @@ const show = () => {
   fetch_user(user.value).then((res) => {
     var k = res.data.items.length;
     var i;
-
+    if(k==0)
+    {
+      alert("No User Found...Please Recheck");
+    }
+    else {
     var jg = 0;
     if (k >= 3) {
       jg = 3;
@@ -37,6 +41,10 @@ const show = () => {
     {
       document.getElementById('im2o').remove();
       document.getElementById('im3o').remove();
+    }
+    else if(jg==1 && temp==1)
+    {
+      document.getElementById('im1o').remove();
     }
   }kummu=kummu+1;
   temp = k;
@@ -67,6 +75,7 @@ const show = () => {
     </div>`
 
     }
+  }
   });
 };
 
